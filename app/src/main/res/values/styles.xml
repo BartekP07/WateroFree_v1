@@ -1,0 +1,25 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CustomNumberPickerTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">#FFC801</item>
+        <item name="colorControlNormal">#FFC801</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:background">#101010</item>
+        <item name="android:textSize">30sp</item>
+        <item name="fontFamily">@font/quicksand_medium</item>
+
+    </style>
+
+</resources>

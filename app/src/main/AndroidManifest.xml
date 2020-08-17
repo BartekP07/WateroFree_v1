@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="app.watero.waterofree">
+
+<!--    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
+<!--    <uses-permission android:name="android.permission.SET_ALARM" />-->
+<!--    <uses-permission android:name="android.permission.WAKE_LOCK" />-->
+
+    <application
+        android:name=".helpers.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/watero_free_lanucher_logo"
+        android:label="@string/g_app_name"
+        android:roundIcon="@mipmap/watero_free_lanucher_logo_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9369047073176706~1679056446"></meta-data>
+
+        <receiver android:name=".helpers.Notification_reciever"></receiver>
+
+        <activity android:name=".application.onboarding.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".application.drinksList.DrinksListActivity"></activity>
+        <activity android:name=".application.onboarding.OnBoardingActivity" />
+        <activity android:name=".application.main.MainActivity"></activity>
+        <activity android:name=".application.questionnaire.SexChooseActivity" />
+        <activity android:name=".application.questionnaire.WeightChooseActivity" />
+        <activity android:name=".application.main.AddDrinkActivity"></activity>
+        <activity android:name=".application.language.LanguagesActivity" />
+        <activity android:name=".application.settings.SettingsActivity"></activity>
+        <activity android:name=".application.settings.InformationDayTargetActivity" />
+    </application>
+
+</manifest>

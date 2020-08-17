@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_BackgroundDark"
+    tools:context=".application.main.AddDrinkActivity">
+
+
+    <LinearLayout
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_arrow" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/drinkName_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/quicksand_regular"
+        android:text="@string/g_water"
+        android:textColor="@color/text_white"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/drinkpercentages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drinkName_text">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/water_drop" />
+
+        <TextView
+            android:id="@+id/drinkpercentages_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="3dp"
+            android:text="100"
+            android:textColor="@color/text_dark2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:text="%"
+            android:textColor="@color/text_dark2" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/barier"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="@+id/show_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drinkpercentages" />
+
+    <ImageView
+        android:id="@+id/show_image_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:background="@drawable/milk_dark_img"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/show_image"
+        app:layout_constraintStart_toEndOf="@+id/barier"
+        app:layout_constraintTop_toTopOf="@+id/show_image" />
+
+    <ImageView
+        android:id="@+id/show_image_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/alcohol_dark_img"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/show_image"
+        app:layout_constraintEnd_toStartOf="@+id/barier"
+        app:layout_constraintTop_toTopOf="@+id/show_image" />
+
+    <ImageView
+        android:id="@+id/show_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/water_light_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drinkpercentages" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/quicksand_regular"
+        android:text="@string/l_container"
+        android:textColor="@color/text_dark2"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_image" />
+
+    <ImageView
+        android:id="@+id/swipeleft_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="20dp"
+        android:src="@drawable/arrow_left_active"
+        app:layout_constraintBottom_toBottomOf="@+id/container_type"
+        app:layout_constraintEnd_toStartOf="@+id/container_type"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/container_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand_regular"
+        android:gravity="center_horizontal"
+        android:text="@string/g_bootle"
+        android:textColor="@color/text_white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/swiperight_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="20dp"
+        android:src="@drawable/arrow_right_active"
+        app:layout_constraintBottom_toBottomOf="@+id/container_type"
+        app:layout_constraintStart_toEndOf="@+id/container_type"
+        app:layout_constraintTop_toTopOf="@+id/container_type" />
+
+    <LinearLayout
+        android:id="@+id/drink_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container_type">
+
+        <TextView
+            android:id="@+id/drinks_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_medium"
+            android:gravity="center_horizontal"
+            android:text="200"
+            android:textColor="@color/text_white"
+            android:textSize="32sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/g_unit"
+            android:textColor="@color/text_white"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/minus_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/plus_btn"
+        android:gravity="center"
+        android:text="-"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/drink_amount"
+        app:layout_constraintEnd_toStartOf="@+id/drink_amount"
+        app:layout_constraintTop_toTopOf="@+id/drink_amount" />
+
+    <Button
+        android:id="@+id/plus_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/plus_btn"
+        android:text="+"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/drink_amount"
+        app:layout_constraintStart_toEndOf="@+id/drink_amount"
+        app:layout_constraintTop_toTopOf="@+id/drink_amount" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/idea"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="70dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/quicksand_medium"
+        android:text="@string/g_add"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drink_amount" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand_medium"
+        android:text="@string/l_did_you_know"
+        android:textColor="@color/text_orange"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/intresting_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/intresting_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/quicksand_regular"
+        android:gravity="center"
+        android:text= "@string/intresting_info_watter"
+        android:textColor="@color/text_white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
