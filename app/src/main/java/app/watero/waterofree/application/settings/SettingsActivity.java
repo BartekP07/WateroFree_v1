@@ -358,10 +358,10 @@ public class SettingsActivity extends AppCompatActivity {
     public void onViewClicked() {
 
         if (switchBtn.isChecked()) {
-            //itemsGroup.setVisibility(View.VISIBLE);
+            itemsGroup.setVisibility(View.VISIBLE);
             //scheudleJob();
         } else {
-            // itemsGroup.setVisibility(View.GONE);
+            itemsGroup.setVisibility(View.GONE);
             //cancelJobs();
         }
     }

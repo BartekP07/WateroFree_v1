@@ -57,10 +57,7 @@ public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.DrinksView
             time = itemView.findViewById(R.id.time_drinked);
             drinkml = itemView.findViewById(R.id.drink_ml);
             drink_hydration = itemView.findViewById(R.id.drink_hydration);
-
             mainLayout = itemView.findViewById(R.id.mainLayout);
-
-
 
         }
     }

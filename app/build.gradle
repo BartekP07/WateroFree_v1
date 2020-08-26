@@ -46,8 +46,8 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // BINDING LIBRARY
-    implementation 'com.jakewharton:butterknife:10.2.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
     // obsluga zapytań HTTP
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
