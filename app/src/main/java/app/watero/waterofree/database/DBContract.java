@@ -42,6 +42,17 @@ public class DBContract {
         public static final String FREQUENCY_COLUMN = "frequency_set";
         public static final String ONBOARDING_COLUMN = "onboarding_active";
         public static final String QUESTIONNAIRE_COLUMN ="questionnaire_active";
+
+        //TABLE HISTORY DAY INFORMATION
+        public static final String TABLE_HISTORY_DAY_INFO = "my_history";
+        public static final String HISTORY_ID = "history_id";
+        public static final String HISTORY_COLUMN_DAY_NUMBER = "day_number";
+        public static final String HISTORY_DATE = "day_date";
+        public static final String HISTORY_QUANTITY = "day_quantity";
+        public static final String HISTORY_PRECENTAGES = "day_precentages";
+        public static final String HISTORY_ISACTIVE_DAY = "day_active";
+        public static final String HISTORY_DAY_TARGET = "day_target";
+
     }
 
 }

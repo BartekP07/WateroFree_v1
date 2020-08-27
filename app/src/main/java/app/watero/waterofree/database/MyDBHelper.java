@@ -18,8 +18,6 @@ import app.watero.waterofree.database.DBContract.*;
 public class MyDBHelper extends SQLiteOpenHelper {
 
     private Context context;
-
-
     private static final String DATABASE_NAME = "Watero.db";
     private static final int DATABASE_VERSION = 3;
 
@@ -63,6 +61,19 @@ public class MyDBHelper extends SQLiteOpenHelper {
             DBEntry.QUESTIONNAIRE_COLUMN + " INTEGER); ";
     // LANGUAGE_COLUMN + " TEXT); ";
 
+    //TABLE HISTORY DAY SETTINGS
+    private static final String historyDayTab = "CREATE TABLE " +
+            DBEntry.TABLE_HISTORY_DAY_INFO + "(" +
+            DBEntry.HISTORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            DBEntry.HISTORY_COLUMN_DAY_NUMBER + " INTEGER, " +
+            DBEntry.HISTORY_DATE  + " TEXT, " +
+            DBEntry.HISTORY_QUANTITY + " INTEGER, " +
+            DBEntry.HISTORY_PRECENTAGES + " INTEGER, " +
+            DBEntry.HISTORY_ISACTIVE_DAY + " INTEGER, " +
+            DBEntry.HISTORY_DAY_TARGET + " INTEGER); ";
+
+
+
     public MyDBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
@@ -74,6 +85,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.execSQL(drinksTab);
         db.execSQL(informationTab);
         db.execSQL(settingsTab);
+        db.execSQL(historyDayTab);
     }
 
     @Override
@@ -82,9 +94,59 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DBEntry.TABLE_DRINKS);
         db.execSQL("DROP TABLE IF EXISTS " + DBEntry.TABLE_INFORMATION);
         db.execSQL("DROP TABLE IF EXISTS " + DBEntry.TABLE_SETTINGS);
+        db.execSQL("DROP TABLE IF EXISTS " + DBEntry.TABLE_HISTORY_DAY_INFO);
 
         // create new tables
         onCreate(db);
+    }
+
+    public Cursor readAllHistoryData() {
+        String query = "SELECT " + "  "+ DBEntry.HISTORY_ID + " , " + DBEntry.HISTORY_COLUMN_DAY_NUMBER + " , " + DBEntry.HISTORY_DATE +  " , "
+                +  DBEntry.HISTORY_QUANTITY + " , " + DBEntry.HISTORY_PRECENTAGES + " , " + DBEntry.HISTORY_ISACTIVE_DAY  + " FROM "
+                + DBEntry.TABLE_HISTORY_DAY_INFO + " ORDER BY " + DBEntry.HISTORY_DATE + " DESC";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public String checkHistoryData(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String selectQuery = "SELECT " + " * " + " FROM " + DBEntry.TABLE_HISTORY_DAY_INFO + " WHERE " + DBEntry.HISTORY_DATE +" = " + toDayDate();
+        String result = null;
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                result = cursor.getString(0);
+            } while (cursor.moveToNext());
+        }
+        return result;
+    }
+
+    public void updateHistoryData(int quantity, int precentages, int activeDay, int dayTarget){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DBEntry.HISTORY_QUANTITY, quantity);
+        cv.put(DBEntry.HISTORY_PRECENTAGES, precentages);
+        cv.put(DBEntry.HISTORY_ISACTIVE_DAY, activeDay);
+        cv.put(DBEntry.HISTORY_DAY_TARGET, dayTarget);
+        db.update(DBEntry.TABLE_HISTORY_DAY_INFO, cv, DBEntry.HISTORY_DATE + " = ", new String[]{toDayDate()});
+    }
+
+    public void addHistoryData(int dayNumber, String data, int quantity, int precentages, int activeDay, int dayTarget){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DBEntry.HISTORY_COLUMN_DAY_NUMBER, dayNumber);
+        cv.put(DBEntry.HISTORY_DATE, data);
+        cv.put(DBEntry.HISTORY_QUANTITY, quantity);
+        cv.put(DBEntry.HISTORY_PRECENTAGES, precentages);
+        cv.put(DBEntry.HISTORY_ISACTIVE_DAY, activeDay);
+        cv.put(DBEntry.HISTORY_DAY_TARGET, dayTarget);
+        db.insert(DBEntry.TABLE_HISTORY_DAY_INFO, null, cv);
     }
 
     //INSERT DATA

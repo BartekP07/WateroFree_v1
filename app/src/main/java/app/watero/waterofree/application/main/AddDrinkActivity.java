@@ -18,9 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -374,11 +371,35 @@ public class AddDrinkActivity extends AppCompatActivity {
 
         MyDBHelper dbHelper = new MyDBHelper(this);
         dbHelper.addDrink(chooseDrink(drink), time, drinkQuantity, hydration, toDayDate(), drinkedCounting());
+
+        int activeDay = dbHelper.isActiveDay();
+        int quantity = dbHelper.getToDayDrinked_ml();
+        int target = dbHelper.getDayTarget();
+
+        if(dbHelper.checkHistoryData() != null){
+                if(activeDay != 1){
+                target = dbHelper.getAtiveDay();
+            }
+            dbHelper.updateHistoryData(quantity,getPercentageWater(target,quantity),activeDay, target);
+        }else{
+            dbHelper.addHistoryData(getDayNumber(),toDayDate(),quantity,getPercentageWater(target,quantity),activeDay,target);
+        }
         if (interstitialAd.isLoaded()) {
             interstitialAd.show();
         } else {
         }
         finish();
+    }
+
+    private int getPercentageWater(int target, int drinked) {
+        double dri = drinked;
+        double tar = target;
+        double sumary = (dri / tar) * 100;
+        int result = (int) sumary;
+        if (sumary <= 0) {
+            result = 0;
+        }
+        return result;
     }
 
     private int chooseDrink(String drink){
@@ -408,6 +429,11 @@ public class AddDrinkActivity extends AppCompatActivity {
         return today;
     }
 
+    private int getDayNumber() {
+        Calendar calendar = Calendar.getInstance();
+        int today = calendar.get(Calendar.DAY_OF_WEEK);
+        return today;
+    }
     private int drinkedCounting() {
         int result = 0;
         int precentages = Integer.parseInt(drinkpercentagesText.getText().toString());
