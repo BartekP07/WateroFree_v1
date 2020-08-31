@@ -1,21 +1,23 @@
-package app.watero.waterofree.application.drinksList;
+package app.watero.waterofree.application.testhistory;
 
-import android.view.View;
 import android.content.Context;
 import android.database.Cursor;
-import android.view.LayoutInflater;;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import app.watero.waterofree.R;
 
-public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.DrinksViewHolder> {
+public class MemberAdp extends RecyclerView.Adapter<MemberAdp.ViewHolder> {
 
     private Context mContext;
     private Cursor mCursor;
@@ -26,12 +28,7 @@ public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.DrinksView
     ArrayList drink_quantity;
     ArrayList drink_hydration;
 
-    public DrinksAdapter(Context context, Cursor cursor) {
-        mContext = context;
-        mCursor = cursor;
-    }
-
-    public DrinksAdapter( Cursor cursor, Context context, ArrayList drink_id, ArrayList drink_name, ArrayList time_drinked, ArrayList drink_quantity, ArrayList drink_hydration) {
+    public MemberAdp(Cursor cursor, Context context, ArrayList drink_id, ArrayList drink_name, ArrayList time_drinked, ArrayList drink_quantity, ArrayList drink_hydration) {
         this.drink_id = drink_id;
         this.mCursor = cursor;
         this.mContext = context;
@@ -40,28 +37,19 @@ public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.DrinksView
         this.drink_quantity = drink_quantity;
         this.drink_hydration = drink_hydration;
     }
-    public class DrinksViewHolder extends RecyclerView.ViewHolder {
-        public TextView drink, time, drinkml, drink_hydration;
-        public LinearLayout mainLayout;
 
-        public DrinksViewHolder(View itemView) {
-            super(itemView);
-            drink = itemView.findViewById(R.id.drink_name);
-            time = itemView.findViewById(R.id.time_drinked);
-            drinkml = itemView.findViewById(R.id.drink_ml);
-            drink_hydration = itemView.findViewById(R.id.drink_hydration);
-            mainLayout = itemView.findViewById(R.id.mainLayout);
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        }
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.my_row,parent,false);
+
+        return new MemberAdp.ViewHolder(view);
     }
+
     @Override
-    public DrinksViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.my_row, parent, false);
-        return new DrinksViewHolder(view);
-    }
-    @Override
-    public void onBindViewHolder(DrinksViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (!mCursor.moveToPosition(position)) {
             return;
         }
@@ -72,9 +60,25 @@ public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.DrinksView
         holder.drinkml.setText(String.valueOf(drink_quantity.get(position)));
         holder.drink_hydration.setText(String.valueOf(drink_hydration.get(position)));
     }
+
     @Override
     public int getItemCount() {
         return mCursor.getCount();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView drink, time, drinkml, drink_hydration;
+        public LinearLayout mainLayout;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            drink = itemView.findViewById(R.id.drink_name);
+            time = itemView.findViewById(R.id.time_drinked);
+            drinkml = itemView.findViewById(R.id.drink_ml);
+            drink_hydration = itemView.findViewById(R.id.drink_hydration);
+            mainLayout = itemView.findViewById(R.id.mainLayout);
+        }
     }
 
     public void swapCursor(Cursor newCursor,int position) {
@@ -105,4 +109,3 @@ public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.DrinksView
         return drinkName;
     }
 }
-

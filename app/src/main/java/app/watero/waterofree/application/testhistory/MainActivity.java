@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         dbHelper = new MyDBHelper(this);
+        setData();
+        storeHistoryData();
 
     }
 
