@@ -59,6 +59,7 @@ public class DrinksListActivity extends AppCompatActivity {
     private UserStorage userStorage;
 
     private int mAmount = 0;
+    //test
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
