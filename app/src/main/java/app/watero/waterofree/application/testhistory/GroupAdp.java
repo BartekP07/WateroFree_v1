@@ -23,7 +23,8 @@ import app.watero.waterofree.R;
 public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
 
     private Activity activity;
-    private Cursor mCursor;
+    private Cursor cursor_history;
+    private Cursor cursor_drinks;
     private Context mContext;
 
     ArrayList day_id;
@@ -35,18 +36,18 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
     ArrayList recyclerView_member;
 
     //Child RecyclerView
-    private Cursor cursor;
     ArrayList drink_id;
     ArrayList drink_name;
     ArrayList time_drinked;
     ArrayList drink_quantity;
     ArrayList drink_hydration;
 
-    GroupAdp(Activity activity, Cursor mCursor, Context context, ArrayList day_id, ArrayList day_name, ArrayList day_date,
-             ArrayList day_sumary, ArrayList day_sumary_procentage, ArrayList day_active, ArrayList recyclerView_member,Cursor cursor, ArrayList drink_id,
+    GroupAdp(Activity activity, Cursor cursor_history, Cursor cursor_drinks, Context context, ArrayList day_id, ArrayList day_name, ArrayList day_date,
+             ArrayList day_sumary, ArrayList day_sumary_procentage, ArrayList day_active, ArrayList recyclerView_member, ArrayList drink_id,
              ArrayList drink_name, ArrayList time_drinked, ArrayList drink_quantity,ArrayList drink_hydration){
         this.activity = activity;
-        this.mCursor = mCursor;
+        this.cursor_history = cursor_history;
+        this.cursor_drinks = cursor_drinks;
         this.mContext = context;
         this.day_id = day_id;
         this.day_name = day_name;
@@ -68,7 +69,7 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        if (!mCursor.moveToPosition(position)) {
+        if (!cursor_history.moveToPosition(position)) {
             return;
         }
         holder.list_row_group_layout.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_scale_animation));
@@ -79,15 +80,15 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
         holder.sumary_day_ml.setText(String.valueOf(day_sumary.get(position)));
         holder.day_summary_precentage.setText(String.valueOf(day_sumary_procentage.get(position)));
 
-        MemberAdp adapterMember = new MemberAdp(cursor, mContext,drink_id,drink_name,time_drinked,drink_quantity,drink_hydration);
-
+        MemberAdp adapterMember = new MemberAdp(cursor_drinks, mContext,drink_id,drink_name,time_drinked,drink_quantity,drink_hydration);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         holder.rvMember.setLayoutManager(layoutManager);
+        holder.rvMember.setAdapter(adapterMember);
     }
 
     @Override
     public int getItemCount() {
-        return mCursor.getCount();
+        return cursor_history.getCount();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
