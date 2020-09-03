@@ -19,6 +19,7 @@ import java.lang.reflect.Member;
 import java.util.ArrayList;
 
 import app.watero.waterofree.R;
+import app.watero.waterofree.database.MyDBHelper;
 
 public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
 
@@ -33,7 +34,7 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
     ArrayList day_sumary;
     ArrayList day_sumary_procentage;
     ArrayList day_active;
-    ArrayList recyclerView_member;
+
 
     //Child RecyclerView
     ArrayList drink_id;
@@ -43,7 +44,7 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
     ArrayList drink_hydration;
 
     GroupAdp(Activity activity, Cursor cursor_history, Cursor cursor_drinks, Context context, ArrayList day_id, ArrayList day_name, ArrayList day_date,
-             ArrayList day_sumary, ArrayList day_sumary_procentage, ArrayList day_active, ArrayList recyclerView_member, ArrayList drink_id,
+             ArrayList day_sumary, ArrayList day_sumary_procentage, ArrayList day_active, ArrayList drink_id,
              ArrayList drink_name, ArrayList time_drinked, ArrayList drink_quantity,ArrayList drink_hydration){
         this.activity = activity;
         this.cursor_history = cursor_history;
@@ -55,7 +56,11 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
         this.day_sumary = day_sumary;
         this.day_sumary_procentage = day_sumary_procentage;
         this.day_active = day_active;
-        this.recyclerView_member = recyclerView_member;
+        this.drink_name = drink_name;
+        this.time_drinked = time_drinked;
+        this.drink_quantity =drink_quantity;
+        this.drink_id = drink_id;
+        this.drink_hydration = drink_hydration;
     }
 
     @NonNull
@@ -63,6 +68,7 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_row_group,parent,false);
+
         return new GroupAdp.ViewHolder(view);
     }
 
@@ -78,7 +84,8 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
         holder.day_name.setText(String.valueOf(day_name.get(position)));
         holder.day_date.setText(String.valueOf(day_date.get(position)));
         holder.sumary_day_ml.setText(String.valueOf(day_sumary.get(position)));
-        holder.day_summary_precentage.setText(String.valueOf(day_sumary_procentage.get(position)));
+        //holder.day_summary_precentage.setText(String.valueOf(day_sumary_procentage.get(position)));
+
 
         MemberAdp adapterMember = new MemberAdp(cursor_drinks, mContext,drink_id,drink_name,time_drinked,drink_quantity,drink_hydration);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
@@ -107,5 +114,13 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
             rvMember = itemView.findViewById(R.id.rv_member);
             list_row_group_layout = itemView.findViewById(R.id.list_row_group_layout);
         }
+    }
+
+    public void setInnerData() {
+        drink_id = new ArrayList<>();
+        drink_name = new ArrayList<>();
+        time_drinked = new ArrayList<>();
+        drink_quantity = new ArrayList<>();
+        drink_hydration = new ArrayList<>();
     }
 }

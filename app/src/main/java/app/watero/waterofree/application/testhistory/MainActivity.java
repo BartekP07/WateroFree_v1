@@ -72,8 +72,12 @@ public class MainActivity extends AppCompatActivity {
         setInnerData();
         storeInnerHistoryData();
 
-        adapterGroup = new GroupAdp(this,getAllHistoryItems(),getAllDrinksItems(),this,day_id,day_number);
+        adapterGroup = new GroupAdp(this,getAllHistoryItems(),getAllDrinksItems(),this,day_id,day_number,day_date,day_quantity,
+                day_precentaes,day_is_active, drink_id,drink_name,time_drinked,drink_quantity,drink_hydration);
 
+        linearLayoutManager = new LinearLayoutManager(this);
+        rvGroup.setLayoutManager(linearLayoutManager);
+        rvGroup.setAdapter(adapterGroup);
     }
 
     public void setData() {

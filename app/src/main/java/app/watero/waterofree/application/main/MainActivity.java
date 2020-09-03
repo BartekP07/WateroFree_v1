@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.historylist_button)
     public void goToHistory() {
         setButtonsActive(false);
-        startActivity(new Intent(this, DrinksListActivity.class));
+        startActivity(new Intent(this, app.watero.waterofree.application.testhistory.MainActivity.class));
 
     }
 

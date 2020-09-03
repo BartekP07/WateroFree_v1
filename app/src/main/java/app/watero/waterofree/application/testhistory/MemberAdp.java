@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -53,6 +52,7 @@ public class MemberAdp extends RecyclerView.Adapter<MemberAdp.ViewHolder> {
         if (!mCursor.moveToPosition(position)) {
             return;
         }
+
         holder.mainLayout.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_scale_animation));
         holder.itemView.setTag(drink_id.get(position));
         holder.drink.setText(chooseDrink(String.valueOf(drink_name.get(position))));
@@ -93,6 +93,26 @@ public class MemberAdp extends RecyclerView.Adapter<MemberAdp.ViewHolder> {
 
     private int chooseDrink(String drink) {
         int drinkName = 1;
+        if (drink.equals("1")) {
+            drinkName = R.string.g_water;
+        } else if (drink.equals("2")) {
+            drinkName = R.string.g_milk;
+        } else if (drink.equals("3")) {
+            drinkName = R.string.g_juice;
+        } else if (drink.equals("4")) {
+            drinkName = R.string.g_coffe;
+        } else if (drink.equals("5")) {
+            drinkName = R.string.g_tea;
+        } else if (drink.equals("6")) {
+            drinkName = R.string.g_alcohol;
+        }
+        return drinkName;
+    }
+
+
+    //utworz dni tygodnia wyslij jako int wyswietl jako tekst
+    private String chooseDay(int day) {
+        String dayName = "";
         if (drink.equals("1")) {
             drinkName = R.string.g_water;
         } else if (drink.equals("2")) {

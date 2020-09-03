@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".application.drinksList.DrinksListActivity"></activity>
+        <activity android:name=".application.testhistory.MainActivity"></activity>
         <activity android:name=".application.onboarding.OnBoardingActivity" />
         <activity android:name=".application.main.MainActivity"></activity>
         <activity android:name=".application.questionnaire.SexChooseActivity" />
