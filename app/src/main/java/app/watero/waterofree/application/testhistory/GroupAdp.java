@@ -81,10 +81,10 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
         holder.list_row_group_layout.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_scale_animation));
 
         holder.itemView.setTag(day_id.get(position));
-        holder.day_name.setText(String.valueOf(day_name.get(position)));
+        holder.day_name.setText(chooseDay(String.valueOf(day_name.get(position))));
         holder.day_date.setText(String.valueOf(day_date.get(position)));
         holder.sumary_day_ml.setText(String.valueOf(day_sumary.get(position)));
-        //holder.day_summary_precentage.setText(String.valueOf(day_sumary_procentage.get(position)));
+        holder.day_summary_precentage.setText(String.valueOf(day_sumary_procentage.get(position)) + "%");
 
 
         MemberAdp adapterMember = new MemberAdp(cursor_drinks, mContext,drink_id,drink_name,time_drinked,drink_quantity,drink_hydration);
@@ -116,11 +116,23 @@ public class GroupAdp extends RecyclerView.Adapter<GroupAdp.ViewHolder> {
         }
     }
 
-    public void setInnerData() {
-        drink_id = new ArrayList<>();
-        drink_name = new ArrayList<>();
-        time_drinked = new ArrayList<>();
-        drink_quantity = new ArrayList<>();
-        drink_hydration = new ArrayList<>();
+    private int chooseDay(String day) {
+        int dayName = 0;
+        if (day.equals("1")) {
+            dayName = R.string.day_sunday;
+        } else if (day.equals("2")){
+            dayName = R.string.day_monday;
+        } else if (day.equals("3")){
+            dayName = R.string.day_tuesday;
+        } else if (day.equals("4")){
+            dayName = R.string.day_wednesday;
+        } else if (day.equals("5")){
+            dayName = R.string.day_thursday;
+        } else if (day.equals("6")){
+            dayName = R.string.day_friday;
+        } else if (day.equals("7")){
+            dayName = R.string.day_saturday;
+        }
+        return dayName;
     }
 }

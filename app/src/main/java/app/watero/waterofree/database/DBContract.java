@@ -53,6 +53,7 @@ public class DBContract {
         public static final String HISTORY_ISACTIVE_DAY = "day_active";
         public static final String HISTORY_DAY_TARGET = "day_target";
 
+
     }
 
 }

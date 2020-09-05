@@ -134,7 +134,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         cv.put(DBEntry.HISTORY_PRECENTAGES, precentages);
         cv.put(DBEntry.HISTORY_ISACTIVE_DAY, activeDay);
         cv.put(DBEntry.HISTORY_DAY_TARGET, dayTarget);
-        db.update(DBEntry.TABLE_HISTORY_DAY_INFO, cv, DBEntry.HISTORY_DATE + " = ", new String[]{toDayDate()});
+        db.update(DBEntry.TABLE_HISTORY_DAY_INFO, cv, DBEntry.HISTORY_DATE + " = ?", new String[]{toDayDate()});
     }
 
     public void addHistoryData(int dayNumber, String data, int quantity, int precentages, int activeDay, int dayTarget){

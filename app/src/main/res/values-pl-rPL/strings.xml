@@ -108,4 +108,11 @@
     <string name="g_no">Nie</string>
     <string name="g_yes">Tak</string>
     <string name="removed_drink">Napój został usunięty!</string>
+    <string name="day_monday">Poniedzialek</string>
+    <string name="day_tuesday">Wtorek</string>
+    <string name="day_wednesday">Środa</string>
+    <string name="day_thursday">Czwartek</string>
+    <string name="day_saturday">Sobota</string>
+    <string name="day_sunday">Niedziela</string>
+    <string name="day_friday">Piątek</string>
 </resources>

@@ -108,4 +108,11 @@
     <string name="g_no">No</string>
     <string name="l_delete_row">Do you want to remove this drink?</string>
     <string name="removed_drink">The drink was removed!</string>
+    <string name="day_monday">Monday</string>
+    <string name="day_tuesday">Tuesday</string>
+    <string name="day_wednesday">Wednesday</string>
+    <string name="day_thursday">Thursday</string>
+    <string name="day_saturday">Saturday</string>
+    <string name="day_sunday">Sunday</string>
+    <string name="day_friday">Friday</string>
 </resources>

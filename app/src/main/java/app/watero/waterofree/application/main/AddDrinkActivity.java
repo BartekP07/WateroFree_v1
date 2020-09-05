@@ -2,14 +2,17 @@ package app.watero.waterofree.application.main;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -375,18 +378,18 @@ public class AddDrinkActivity extends AppCompatActivity {
         int activeDay = dbHelper.isActiveDay();
         int quantity = dbHelper.getToDayDrinked_ml();
         int target = dbHelper.getDayTarget();
+        boolean update = dbHelper.checkHistoryData());
 
-        if(dbHelper.checkHistoryData() != null){
-                if(activeDay != 1){
-                target = dbHelper.getAtiveDay();
-            }
-            dbHelper.updateHistoryData(quantity,getPercentageWater(target,quantity),activeDay, target);
-        }else{
+        Toast.makeText(this, " " + update + " -----------------------------------------------------------------------------", Toast.LENGTH_SHORT).show();
+        if(dbHelper.checkHistoryData().equals("0")){
             dbHelper.addHistoryData(getDayNumber(),toDayDate(),quantity,getPercentageWater(target,quantity),activeDay,target);
+        } else {
+            dbHelper.updateHistoryData(quantity,getPercentageWater(target,quantity),activeDay, target);
         }
         if (interstitialAd.isLoaded()) {
             interstitialAd.show();
         } else {
+
         }
         finish();
     }
