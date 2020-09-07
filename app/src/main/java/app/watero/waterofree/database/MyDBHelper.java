@@ -113,15 +113,15 @@ public class MyDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public String checkHistoryData(){
+    public int checkHistoryData(){
         SQLiteDatabase database = this.getReadableDatabase();
-        String selectQuery = "SELECT " + " * " + " FROM " + DBEntry.TABLE_HISTORY_DAY_INFO + " WHERE " + DBEntry.HISTORY_DATE +" = " + toDayDate();
-        String result = null;
+        String selectQuery = "SELECT " + " * " + " FROM " + DBEntry.TABLE_HISTORY_DAY_INFO + " WHERE " + DBEntry.HISTORY_DATE + " = " + toDayDate();
+        int result = 0;
         Cursor cursor = database.rawQuery(selectQuery, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             do {
-                result = cursor.getString(0);
+                result = cursor.getInt(0);
             } while (cursor.moveToNext());
         }
         return result;
@@ -256,7 +256,6 @@ public class MyDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(DBEntry.LANGUAGE_COLUMN, language);
-
         db.update(DBEntry.TABLE_SETTINGS, cv,DBEntry.LANGUAGE_COLUMN + " =? ", new String[]{"1"});
     }
 

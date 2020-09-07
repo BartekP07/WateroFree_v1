@@ -378,13 +378,11 @@ public class AddDrinkActivity extends AppCompatActivity {
         int activeDay = dbHelper.isActiveDay();
         int quantity = dbHelper.getToDayDrinked_ml();
         int target = dbHelper.getDayTarget();
-        boolean update = dbHelper.checkHistoryData());
 
-        Toast.makeText(this, " " + update + " -----------------------------------------------------------------------------", Toast.LENGTH_SHORT).show();
-        if(dbHelper.checkHistoryData().equals("0")){
-            dbHelper.addHistoryData(getDayNumber(),toDayDate(),quantity,getPercentageWater(target,quantity),activeDay,target);
-        } else {
+        if (dbHelper.checkHistoryData() != 0) {
             dbHelper.updateHistoryData(quantity,getPercentageWater(target,quantity),activeDay, target);
+        } else {
+            dbHelper.addHistoryData(getDayNumber(),toDayDate(),quantity,getPercentageWater(target,quantity),activeDay,target);
         }
         if (interstitialAd.isLoaded()) {
             interstitialAd.show();
