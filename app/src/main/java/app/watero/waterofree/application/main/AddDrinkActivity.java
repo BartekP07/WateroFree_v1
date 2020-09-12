@@ -31,6 +31,7 @@ import java.util.Locale;
 import app.watero.waterofree.R;
 import app.watero.waterofree.database.MyDBHelper;
 import app.watero.waterofree.helpers.App;
+import app.watero.waterofree.helpers.Methods;
 import app.watero.waterofree.helpers.UserStorage;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -109,7 +110,9 @@ public class AddDrinkActivity extends AppCompatActivity {
     private static final int jobId = 0;
     private int selectedNetworkOption = JobInfo.NETWORK_TYPE_ANY;
 
-    MyDBHelper dbHelper;
+    private MyDBHelper dbHelper;
+    private Methods methods;
+    private String today = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,6 +123,8 @@ public class AddDrinkActivity extends AppCompatActivity {
         tryLoadAdMob();
 
         dbHelper = new MyDBHelper(this);
+        methods = new Methods();
+        today = methods.toDayDate();
     }
 
     private void tryLoadAdMob(){
@@ -373,17 +378,23 @@ public class AddDrinkActivity extends AppCompatActivity {
         int hydration = Integer.valueOf(drinkpercentagesText.getText().toString().trim());
 
         MyDBHelper dbHelper = new MyDBHelper(this);
-        dbHelper.addDrink(chooseDrink(drink), time, drinkQuantity, hydration, toDayDate(), drinkedCounting());
+        dbHelper.addDrink(chooseDrink(drink), time, drinkQuantity, hydration, today, drinkedCounting());
 
         int activeDay = dbHelper.isActiveDay();
         int quantity = dbHelper.getToDayDrinked_ml();
         int target = dbHelper.getDayTarget();
+        //dbHelper.updateHistoryData(quantity,getPercentageWater(target,quantity),activeDay, target);
 
-        if (dbHelper.checkHistoryData() != 0) {
+        Toast.makeText(this, "= " + dbHelper.checkHistoryData(), Toast.LENGTH_SHORT).show();
+
+        if (dbHelper.checkHistoryData()) {
             dbHelper.updateHistoryData(quantity,getPercentageWater(target,quantity),activeDay, target);
+            Log.d("-Update DATABASE----", "TRUE!--------------------------------");
         } else {
-            dbHelper.addHistoryData(getDayNumber(),toDayDate(),quantity,getPercentageWater(target,quantity),activeDay,target);
+            dbHelper.addHistoryData(getDayNumber(),today,quantity,getPercentageWater(target,quantity),activeDay,target);
+            Log.d("-ADD DATABASE----", "FALSE!--------------------------------");
         }
+
         if (interstitialAd.isLoaded()) {
             interstitialAd.show();
         } else {
@@ -420,14 +431,6 @@ public class AddDrinkActivity extends AppCompatActivity {
         }
 
         return drinkName;
-    }
-
-    private String toDayDate() {
-        Date date = Calendar.getInstance().getTime();
-        // Display a date in day, month, year format
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String today = formatter.format(date);
-        return today;
     }
 
     private int getDayNumber() {
